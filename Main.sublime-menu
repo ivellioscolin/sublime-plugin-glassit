@@ -1,0 +1,91 @@
+[
+    {
+        "id": "tools",
+        "caption": "Tools",
+        "children":
+        [
+            {
+                "id": "packages",
+                "caption": "Packages",
+                "children":
+                [
+                    {
+                        "id": "GlassIt",
+                        "caption": "Glass It",
+                        "children":
+                        [
+                            {
+                                "command": "toggle_transparency",
+                                "caption": "Transparency Enabled"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "caption": "Preferences",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "Glass It",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/GlassIt/glassit.sublime-settings"},
+                                "caption": "Settings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/User/glassit.sublime-settings"},
+                                "caption": "Settings – User"
+                            },
+                            { "caption": "-" },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/GlassIt/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – User"
+                            },
+                            { "caption": "-" },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/GlassIt/Default (Windows).sublime-mousemap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Mouse Bindings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (Windows).sublime-mousemap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Mouse Bindings – User"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

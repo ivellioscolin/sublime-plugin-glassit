@@ -1,0 +1,14 @@
+[
+    {
+        "keys": ["ctrl+alt+z"],
+        "command": "increase_transparency"
+    },
+    {
+        "keys": ["ctrl+alt+x"],
+        "command": "reset_transparency"
+    },
+    {
+        "keys": ["ctrl+alt+c"],
+        "command": "decrease_transparency"
+    }
+]

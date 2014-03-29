@@ -1,0 +1,14 @@
+[
+    {
+        "caption": "Increase Windows Transparency", 
+        "command": "increase_transparency"
+    },
+    {
+        "caption": "Decrease Windows Transparency", 
+        "command": "decrease_transparency"
+    },
+    {
+        "caption": "Reset to default Windows Transparency", 
+        "command": "reset_transparency"
+    }
+]
