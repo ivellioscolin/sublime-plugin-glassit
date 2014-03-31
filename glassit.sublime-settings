@@ -1,5 +1,6 @@
 {
     "alpha_percentage": 90,
+    "alpha_step": 5,
     "application": "SetTransparency.exe",
     "st_title": "Sublime Text"
 }

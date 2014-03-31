@@ -1,8 +1,29 @@
-import sublime, sublime_plugin, os, sys, subprocess
+import sublime, sublime_plugin, os, sys, re, subprocess
+
+def findApp(app_name):
+    pathFound = False
+    folder = sublime.packages_path()
+    absPath = ""
+    tail = "dummy"
+    st_app = "sublime_text.exe"
+    while(pathFound != True):
+        absPath = folder + "\\" + app_name
+        drv, tail = os.path.splitdrive(folder)
+        if(tail == "\\"):
+            break
+        else:
+            if(not os.path.isfile(folder + "\\" + st_app)):
+                folder = os.path.dirname(folder)
+            else:
+                pathFound = True
+                if(os.path.isfile(absPath)):
+                    return True, absPath
+    return False, ""
 
 def set_window_transparency_nt(pid, alpha, app_title, app_name):
-    if(os.path.isfile(app_name)):
-        command = app_name + " " + str(pid) + " " + str(alpha) + " " + app_title
+    found, app_path = findApp(app_name)
+    if(found):
+        command = app_path + " " + str(pid) + " " + str(alpha) + " " + app_title
         subprocess.Popen(command, shell=True)
         print("Sublime window transparency is set to %d" %(alpha))
     else:
@@ -20,6 +41,7 @@ def plugin_loaded():
         def load(self):
             if (sublime.platform() == "windows"):
                 config.alpha_per_default = int(settings.get('alpha_percentage', 90))
+                config.alpha_step = int(settings.get('alpha_step', 5))
                 config.app_name = settings.get('application', "SetTransparency.exe")
                 config.st_title = settings.get('st_title', "Sublime Text")
                 if sys.version_info[0] == 2:
@@ -82,7 +104,7 @@ class ResetTransparencyCommand(sublime_plugin.TextCommand):
 class IncreaseTransparencyCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if(config.enable == True):
-            config.alpha_per_current = config.alpha_per_current - 5
+            config.alpha_per_current = config.alpha_per_current - config.alpha_step
             if(config.alpha_per_current < 0):
                 config.alpha_per_current = 0
             config.alpha_per_last = config.alpha_per_current
@@ -92,7 +114,7 @@ class IncreaseTransparencyCommand(sublime_plugin.TextCommand):
 class DecreaseTransparencyCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         if(config.enable == True):
-            config.alpha_per_current = config.alpha_per_current + 5
+            config.alpha_per_current = config.alpha_per_current + config.alpha_step
             if(config.alpha_per_current > 100):
                 config.alpha_per_current = 100
             config.alpha_per_last = config.alpha_per_current
