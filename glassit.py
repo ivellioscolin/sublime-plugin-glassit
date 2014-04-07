@@ -1,29 +1,34 @@
 import sublime, sublime_plugin, os, sys, re, subprocess
 
-def findApp(app_name):
-    pathFound = False
-    folder = sublime.packages_path()
-    absPath = ""
-    tail = "dummy"
-    st_app = "sublime_text.exe"
-    while(pathFound != True):
-        absPath = folder + "\\" + app_name
-        drv, tail = os.path.splitdrive(folder)
-        if(tail == "\\"):
-            break
-        else:
-            if(not os.path.isfile(folder + "\\" + st_app)):
-                folder = os.path.dirname(folder)
-            else:
-                pathFound = True
-                if(os.path.isfile(absPath)):
-                    return True, absPath
+ST_MAIN_PROGRAM = 'sublime_text.exe'
+
+# ST2: main program path isn't included in sys.path, but sys.executable points to the main program. 
+def isAppExist2(app_name):
+    st_path = os.path.dirname(sys.executable)
+    absPath = st_path + "\\" + app_name
+    if(os.path.isfile(absPath)):
+        return True, absPath
     return False, ""
+
+# ST3: main program path is included in sys.path. 
+def isAppExist3(app_name):
+    for dirName in sys.path:
+        if(os.path.isfile(dirName + "\\" + ST_MAIN_PROGRAM)):
+            absPath = dirName + "\\" + app_name
+            if(os.path.isfile(absPath)):
+                return True, absPath
+    return False, ""
+
+def findApp(app_name):
+    if sys.version_info[0] == 2:
+        return isAppExist2(app_name)
+    else:
+        return isAppExist3(app_name)
 
 def set_window_transparency_nt(pid, alpha, app_title, app_name):
     found, app_path = findApp(app_name)
     if(found):
-        command = app_path + " " + str(pid) + " " + str(alpha) + " " + app_title
+        command = "\"" + app_path + "\"" + " " + str(pid) + " " + str(alpha) + " " + app_title
         subprocess.Popen(command, shell=True)
         print("Sublime window transparency is set to %d" %(alpha))
     else:

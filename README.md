@@ -1,4 +1,4 @@
-##GlassIt v 1.1.0 <br/>
+##GlassIt v 1.2.0 <br/>
 
 ###NOTES
 - With this plugin, you can change the window transparency by key pressing or mouse whell scroll.
@@ -23,5 +23,6 @@ https://github.com/ivellioscolin/settransparency/tree/master/binary
 https://github.com/ivellioscolin/sublime-plugin-glassit.git
 
 ###HISTORY
+1.2.0 Fix path search issue when main program and packages are installed into different locations.  
 1.1.0 Fix path search issue, use absolute path instead. Add setting to change adjustment step.  
 1.0.0 Initial version  
