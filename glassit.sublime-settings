@@ -1,4 +1,6 @@
 {
+    "enabled": true,
+    "alpha_percentage_default": 90,
     "alpha_percentage": 90,
     "alpha_step": 5,
     "application": "SetTransparency.exe",

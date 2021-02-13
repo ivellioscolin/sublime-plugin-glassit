@@ -1,12 +1,12 @@
 [
     {
-        "button": "scroll_down", 
-        "modifiers": ["alt"], 
+        "button": "scroll_down",
+        "modifiers": ["alt"],
         "command": "decrease_transparency"
     },
     {
-        "button": "scroll_up", 
-        "modifiers": ["alt"], 
+        "button": "scroll_up",
+        "modifiers": ["alt"],
         "command": "increase_transparency"
     }
 ]

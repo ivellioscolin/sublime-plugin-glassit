@@ -1,28 +1,42 @@
-##GlassIt v 1.2.0 <br/>
+## GlassIt v 1.3.0 <br/>
 
-###NOTES
+### NOTES
 - With this plugin, you can change the window transparency by key pressing or mouse whell scroll.
 - Works for both sublime 2 and 3.
 - Only works on Windows later than Windows XP.
 
-###INSTALLATION
+### INSTALLATION
 1. Get "SetTransparency.exe" from below link or compile by yourself.
 https://github.com/ivellioscolin/settransparency/tree/master/binary
 2. Put "SetTransparency.exe" into ST main path.
 3. Search and install "GlassIt" via "Package Control". You may also download the archive and extract to "{sublime}\Data\Packages\GlassIt".
 
-###USAGE
+### USAGE
 1. ST main window will be set as transparent after the plugin loaded.
-2. Change the transparency level by:
-  - Press and hold "alt", then scroll up or down mouse wheel to adjust the transparency level.
-  - Press "ctrl+alt+z" to increase the transparency, "ctrl+alt+c" to decrease, "ctrl+alt+x" to reset to default.
-3. Enable or disable transparency in "Tools"->"Packages"->"Glass It".
-4. Default settings can be changed in "Preferences"->"Package Settings"->"Glass It".
+2. To adjust the transparency behavior:
+    - Increase/Decrease:
+      - Via mouse wheel: alt + mouse wheel up/down
+      - Via keyboard: ctrl + alt + z/c
+      - Via command palette.
+    - Reset to default:
+      - Via keyboard: ctrl + alt + x
+      - Via command palette.
+    - Toggle on/off:
+      - "Tools"->"Packages"->"Glass It".
+      - Via command palette.
+    - Modify "Glass It" user settings.
+      - "enabled": Control whether Glass It is enabled or not.
+      - "alpha_percentage": The alpha percentage if "Glass It" is enabled.
 
-###LINK
+### LINK
 https://github.com/ivellioscolin/sublime-plugin-glassit.git
 
-###HISTORY
-1.2.0 Fix path search issue when main program and packages are installed into different locations.  
-1.1.0 Fix path search issue, use absolute path instead. Add setting to change adjustment step.  
-1.0.0 Initial version  
+### HISTORY
+- 1.3.0  
+Save user-made changes into user settings.
+- 1.2.0  
+Fix path search issue when main program and packages are installed into different locations.
+- 1.1.0  
+Fix path search issue, use absolute path instead. Add setting to change adjustment step.
+- 1.0.0  
+Initial version

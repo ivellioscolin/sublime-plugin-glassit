@@ -1,14 +1,18 @@
 [
     {
-        "caption": "Increase Windows Transparency", 
+        "caption": "Increase Window Transparency",
         "command": "increase_transparency"
     },
     {
-        "caption": "Decrease Windows Transparency", 
+        "caption": "Decrease Window Transparency",
         "command": "decrease_transparency"
     },
     {
-        "caption": "Reset to default Windows Transparency", 
+        "caption": "Reset to default Window Transparency",
         "command": "reset_transparency"
+    },
+    {
+        "caption": "Toggle Window Transparency On/Off",
+        "command": "toggle_transparency"
     }
 ]
