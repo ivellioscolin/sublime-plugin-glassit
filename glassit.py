@@ -1,38 +1,15 @@
 import sublime, sublime_plugin, os, sys, re, subprocess
-
-ST_MAIN_PROGRAM = 'sublime_text.exe'
-
-# ST2: main program path isn't included in sys.path, but sys.executable points to the main program. 
-def isAppExist2(app_name):
-    st_path = os.path.dirname(sys.executable)
-    absPath = st_path + "\\" + app_name
-    if(os.path.isfile(absPath)):
-        return True, absPath
-    return False, ""
-
-# ST3: main program path is included in sys.path. 
-def isAppExist3(app_name):
-    for dirName in sys.path:
-        if(os.path.isfile(dirName + "\\" + ST_MAIN_PROGRAM)):
-            absPath = dirName + "\\" + app_name
-            if(os.path.isfile(absPath)):
-                return True, absPath
-    return False, ""
-
-def findApp(app_name):
-    if sys.version_info[0] == 2:
-        return isAppExist2(app_name)
-    else:
-        return isAppExist3(app_name)
+import shutil
 
 def set_window_transparency_nt(pid, alpha, app_title, app_name):
-    found, app_path = findApp(app_name)
-    if(found):
-        command = "\"" + app_path + "\"" + " " + str(pid) + " " + str(alpha) + " " + app_title
+    app_path = shutil.which(app_name)
+    found = app_path is not None
+    if found:
+        command = app_name + " " + str(pid) + " " + str(alpha) + " " + app_title
         subprocess.Popen(command, shell=True)
-        print("Sublime window transparency is set to %d" %(alpha))
+        print("Sublime window transparency is set to %d" % (alpha))
     else:
-        print("Cannot find %s! Please download and put into sublime path." %(app_name))
+        print("Cannot find %s in your environment path" % (app_name))
     return found
 
 def update_window_transparency_nt():

@@ -3,6 +3,8 @@
     "alpha_percentage_default": 90,
     "alpha_percentage": 90,
     "alpha_step": 5,
+    // Download the pre-compiled binary and put in your environment path
+    // from https://github.com/ivellioscolin/settransparency/tree/master/binary
     "application": "SetTransparency.exe",
     "st_title": "Sublime Text"
 }
