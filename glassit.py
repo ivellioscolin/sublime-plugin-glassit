@@ -1,38 +1,35 @@
 import sublime, sublime_plugin, os, sys, re, subprocess
 
-ST_MAIN_PROGRAM = 'sublime_text.exe'
+def findApp(app_name):
+    # ST2: main program path isn't included in sys.path, but sys.executable points to the main program.
+    if sys.version_info[0] == 2:
+        st_path = os.path.dirname(sys.executable)
+    else:
+        # ST3 & ST4: main program path from sublime.executable_path()
+        st_path = os.path.dirname(sublime.executable_path())
 
-# ST2: main program path isn't included in sys.path, but sys.executable points to the main program. 
-def isAppExist2(app_name):
-    st_path = os.path.dirname(sys.executable)
     absPath = st_path + "\\" + app_name
     if(os.path.isfile(absPath)):
         return True, absPath
     return False, ""
 
-# ST3: main program path is included in sys.path. 
-def isAppExist3(app_name):
-    for dirName in sys.path:
-        if(os.path.isfile(dirName + "\\" + ST_MAIN_PROGRAM)):
-            absPath = dirName + "\\" + app_name
-            if(os.path.isfile(absPath)):
-                return True, absPath
+def findAppAlt(app_name):
+    absPathAlt = os.path.join(config.app_path_alt, app_name)
+    if (os.path.isfile(absPathAlt)):
+        return True, absPathAlt
     return False, ""
-
-def findApp(app_name):
-    if sys.version_info[0] == 2:
-        return isAppExist2(app_name)
-    else:
-        return isAppExist3(app_name)
 
 def set_window_transparency_nt(pid, alpha, app_title, app_name):
     found, app_path = findApp(app_name)
+    if (not found):
+        found, app_path = findAppAlt(app_name)
     if(found):
         command = "\"" + app_path + "\"" + " " + str(pid) + " " + str(alpha) + " " + app_title
         subprocess.Popen(command, shell=True)
+        print('Using transparency utility from "%s"' %(app_path))
         print("Sublime window transparency is set to %d" %(alpha))
     else:
-        print("Cannot find %s! Please download and put into sublime path." %(app_name))
+        print("Cannot find %s! Please download and put into sublime path or application_path_alt." %(app_name))
     return found
 
 def update_window_transparency_nt():
@@ -63,6 +60,7 @@ def plugin_loaded():
                 config.alpha_step = int(settings.get('alpha_step', 5))
                 config.alpha_max = 255
                 config.app_name = settings.get('application', "SetTransparency.exe")
+                config.app_path_alt  = settings.get('application_path_alt', "")
                 config.st_title = settings.get('st_title', "Sublime Text")
                 config.delay = 5000
 
